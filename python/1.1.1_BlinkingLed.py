@@ -29,6 +29,7 @@ def main():
         if count % 12 == 0:
             count = 0
 
+        count = count + 1
         time.sleep(0.05)
         # print ('LED OFF...')
         # Turn off LED
