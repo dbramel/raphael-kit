@@ -20,13 +20,13 @@ def main():
         # Turn on LED
         if count % 3 == 0:
             GPIO.output(RedLedPin, GPIO.LOW)
-            print(RedWords[count / 3], end='')
+            print(RedWords[int(count / 3)], end='')
         else:
             GPIO.output(RedLedPin, GPIO.HIGH)
 
         if count % 4 == 0:
             GPIO.output(GreenLedPin, GPIO.LOW)
-            print(GreenWords[count / 4], end='')
+            print(GreenWords[int(count / 4)], end='')
         else:
             GPIO.output(GreenLedPin, GPIO.HIGH)
 
