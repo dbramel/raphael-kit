@@ -1,27 +1,43 @@
 #!/usr/bin/env python3
 import RPi.GPIO as GPIO
 import time
-LedPin = 17
+RedLedPin = 17
+GreenLedPin = 18
 def setup():
     # Set the GPIO modes to BCM Numbering
     GPIO.setmode(GPIO.BCM)
     # Set LedPin's mode to output,and initial level to High(3.3v)
-    GPIO.setup(LedPin, GPIO.OUT, initial=GPIO.HIGH)
+    GPIO.setup(RedLedPin, GPIO.OUT, initial=GPIO.HIGH)
+    GPIO.setup(GreenLedPin, GPIO.OUT, initial=GPIO.HIGH)
+
 # Define a main function for main process
 def main():
+    count = 0;
     while True:
-        print ('...LED ON')
+        # print ('...LED ON')
         # Turn on LED
-        GPIO.output(LedPin, GPIO.LOW)
-        time.sleep(0.5)
-        print ('LED OFF...')
+        if count % 3 == 0:
+            GPIO.output(RedLedPin, GPIO.LOW)
+        else:
+            GPIO.output(RedLedPin, GPIO.HIGH)
+
+        if count % 4 == 0:
+            GPIO.output(GreenLedPin, GPIO.LOW)
+        else:
+            GPIO.output(GreenLedPin, GPIO.HIGH)
+
+        if count % 12 == 0:
+            count = 0
+
+        time.sleep(0.05)
+        # print ('LED OFF...')
         # Turn off LED
-        GPIO.output(LedPin, GPIO.HIGH)
-        time.sleep(0.5)
+        # GPIO.output(RedLedPin, GPIO.HIGH)
+        # time.sleep(0.5)
 # Define a destroy function for clean up everything after the script finished
 def destroy():
     # Turn off LED
-    GPIO.output(LedPin, GPIO.HIGH)
+    GPIO.output(RedLedPin, GPIO.HIGH)
     # Release resource
     GPIO.cleanup()                   
 # If run this script directly, do:
