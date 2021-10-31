@@ -2,7 +2,9 @@
 import RPi.GPIO as GPIO
 import time
 RedLedPin = 17
+RedWords = ["pass", "god-", "but"]
 GreenLedPin = 18
+GreenWords = [" ", "the ", "damned ", "ter"]
 def setup():
     # Set the GPIO modes to BCM Numbering
     GPIO.setmode(GPIO.BCM)
@@ -18,19 +20,22 @@ def main():
         # Turn on LED
         if count % 3 == 0:
             GPIO.output(RedLedPin, GPIO.LOW)
+            print(RedWords[count / 3]),
         else:
             GPIO.output(RedLedPin, GPIO.HIGH)
 
         if count % 4 == 0:
             GPIO.output(GreenLedPin, GPIO.LOW)
+            print(GreenWords[count / 4]),
         else:
             GPIO.output(GreenLedPin, GPIO.HIGH)
 
         if count % 12 == 0:
             count = 0
+            print("")
 
         count = count + 1
-        time.sleep(0.05)
+        time.sleep(0.3)
         # print ('LED OFF...')
         # Turn off LED
         # GPIO.output(RedLedPin, GPIO.HIGH)
