@@ -1,6 +1,14 @@
 #!/usr/bin/env python3
-import RPi.GPIO as GPIO
 import time
+
+# import RPi.GPIO as GPIO
+try:
+    # checks if you have access to RPi.GPIO, which is available inside RPi
+    import RPi.GPIO as GPIO
+except:
+    # In case of exception, you are executing your script outside of RPi, so import Mock.GPIO
+    import Mock.GPIO as GPIO
+
 RedLedPin = 17
 RedWords = ["pass", "god-", "but"]
 GreenLedPin = 18
@@ -18,6 +26,8 @@ def main():
     while True:
         # print ('...LED ON')
         # Turn on LED
+        print(count)
+
         if count % 3 == 0:
             GPIO.output(RedLedPin, GPIO.LOW)
             print(RedWords[int(count / 3)], end='')

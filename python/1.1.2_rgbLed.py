@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 
-import RPi.GPIO as GPIO
 import time
+
+try:
+    # checks if you have access to RPi.GPIO, which is available inside RPi
+    import RPi.GPIO as GPIO
+except:
+    # In case of exception, you are executing your script outside of RPi, so import Mock.GPIO
+    import Mock.GPIO as GPIO
 
 # Set up a color table in Hexadecimal
 COLOR = [0xFF0000, 0x00FF00, 0x0000FF, 0xFFFF00, 0xFF00FF, 0x00FFFF]
@@ -59,9 +65,13 @@ def setColor(color):
 
 def main():
 	while True:
-		for color in COLOR:# Assign every item in the COLOR list to the color respectively and change the color of the RGB LED via the setColor() function.
-			setColor(color)# change the color of the RGB LED
-			time.sleep(0.5)# set delay for 0.5s after each color changing. Modify this parameter will changed the LED's color changing rate.   
+		color = 0;
+		# for color in COLOR:# Assign every item in the COLOR list to the color respectively and change the color of the RGB LED via the setColor() function.
+		while color <= 0xFFFFFF:
+			setColor(color)  # change the color of the RGB LED
+			# time.sleep(0.5)# set delay for 0.5s after each color changing. Modify this parameter will changed the LED's color changing rate.
+			color = color + 1;
+
 
 def destroy():
 	# Stop all pwm channel
