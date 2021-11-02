@@ -8,18 +8,24 @@ RCLK = 23
 SRCLK = 18
 
 placePin = (10, 22, 27, 17)
+# Note that the convention here is exactly backwards
+# from the one-segment unit. I.e. bit set to 'true'
+# turns the element off, not on. So these are 1's
+# complement of the values used in 1.1.5
 number = (0xc0, 0xf9, 0xa4, 0xb0, 0x99, 0x92, 0x82, 0xf8, 0x80, 0x90)
 
 counter = 0
 timer1 = 0
 
 def clearDisplay():
-    for i in range(8):
-        GPIO.output(SDI, 1)
-        GPIO.output(SRCLK, GPIO.HIGH)
-        GPIO.output(SRCLK, GPIO.LOW)
-    GPIO.output(RCLK, GPIO.HIGH)
-    GPIO.output(RCLK, GPIO.LOW)    
+    # setting all the bits to 'true' clears them
+    hc595_shift(0xFF)
+    # for i in range(8):
+    #     GPIO.output(SDI, 1)
+    #     GPIO.output(SRCLK, GPIO.HIGH)
+    #     GPIO.output(SRCLK, GPIO.LOW)
+    # GPIO.output(RCLK, GPIO.HIGH)
+    # GPIO.output(RCLK, GPIO.LOW)
 
 def hc595_shift(data): 
     for i in range(8):

@@ -26,13 +26,27 @@ def scrollToDisplayText():
         virtual.set_position((offset,0))
         time.sleep(0.1)
 
+def scrollMessage(message):
+    with canvas(virtual) as draw:
+        text(draw, (0, 0), message, fill="white", font=proportional(CP437_FONT))
+
+    for offset in range(150):
+        virtual.set_position((offset,0))
+        time.sleep(0.1)
+
 def main():
     while True:
-        displayRectangle()
-        time.sleep(2)
-        displayLetter()
-        time.sleep(2)
-        scrollToDisplayText()
+        print ("What should I display?")
+        message = input()
+        scrollMessage(message)
+        # print("displaying rectangle")
+        # displayRectangle()
+        # time.sleep(2)
+        # print("displaying letter")
+        # displayLetter()
+        # time.sleep(2)
+        # print("scrolling")
+        # scrollToDisplayText()
 
 def destroy():
     pass
